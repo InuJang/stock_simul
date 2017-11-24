@@ -6,19 +6,20 @@ int MyMoney=10000000;
 void DisplayMenu();
 
 int main(){
-   int select=-1;
-   
+   int step=-1;
+   char quit[10]={'\0'};
+
    DisplayMenu();
-   
-   while(select  != 1 && select != 2 && select != 3){
-     scanf("%d",&select);
+ 
+   while(step  != 1 && step != 2 && step != 3){
+     scanf("%d",&step);
    }
-   if( select == 1 )
+   if( step == 1 )
    {
      system("clear");
-     while( select==1 ){ 
+     while( step == 0  ){
        printf("hello world\n");
-       scanf("%d",&select);
+       scanf("%d",&step);
      }
    }
 
