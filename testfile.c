@@ -1,13 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 int MyMoney=10000000;
 void DisplayMenu();
 int main(){
-   int select;
+   int select=-1;
+   DisplayMenu();
+   while(select!=-1){
+     scanf("%d",&select);
+   }
+   if( select == 1 )
+   {
+     while( select!=0){ 
+       system("clear");
+       printf("hello world\n");
+     }
+   }
       
    
-   DisplayMenu();
+   
    return 0;
 }
 
