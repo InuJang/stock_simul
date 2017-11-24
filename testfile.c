@@ -1,6 +1,9 @@
 #include <stdio.h>
 int main()
 {
-printf("This is stock simulation\n");
+printf("**********************************************************\n");
+printf("******This is Stock Simulation of Embeddedsw Project******\n");
+printf("**********************************************************\n");
+
 return 0;
 }
