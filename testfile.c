@@ -4,22 +4,25 @@
 
 int MyMoney=10000000;
 void DisplayMenu();
+
 int main(){
    int select=-1;
+   
    DisplayMenu();
-   while(select!=-1){
+   
+   while(select  != 1 && select != 2 && select != 3){
      scanf("%d",&select);
    }
    if( select == 1 )
    {
-     while( select!=0){ 
-       system("clear");
+     system("clear");
+     while( select==1 ){ 
        printf("hello world\n");
+       scanf("%d",&select);
      }
    }
-      
-   
-   
+
+
    return 0;
 }
 
