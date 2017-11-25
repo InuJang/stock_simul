@@ -1,30 +1,49 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int MyMoney=10000000;
+
 void DisplayMenu();
 
 int main(){
-   int step=-1;
-   char quit[10]={'\0'};
-
+   //int step=-1;
+   
    DisplayMenu();
- 
-   while(step  != 1 && step != 2 && step != 3){
-     scanf("%d",&step);
-   }
-   if( step == 1 )
-   {
-     system("clear");
-     
-     while( step == 1  ){
-       printf("hello world\n");
-       scanf("%d",&step);
-       if( step == 1 ) system("clear");
-     }
-   }
+   char step[50]={'\0'};
+   pid_t pid;
+   pid=fork();
+   if( pid < 0 ) perror("pid");
+   else if( pid == 0 ){
+      printf("quit\n");
+      gets(step);
+   } 
 
+   while(1){
+
+    //while(step  != 1 && step != 2 && step != 3){
+    //  scanf("%d",&step);
+    //}
+
+    if( step == 1 )
+    {
+      system("clear");
+      printf("1\n");
+    }
+    else if( step == 2 )
+    {
+      system("clear");
+      printf("2\n");
+    }
+    else if( step == 3 )
+    {
+     system("clear");
+     printf("3\n");
+    }
+
+
+  }
 
    return 0;
 }
@@ -39,5 +58,4 @@ void DisplayMenu(){
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
-
 }
