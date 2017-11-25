@@ -30,6 +30,9 @@ int main(){
     {
       system("clear");
       printf("1\n");
+      while(1){
+        printf("111");
+      }
     }
     else if( step == 2 )
     {
