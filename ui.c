@@ -12,18 +12,21 @@ void Invest(int money);
 int Mymoney=0;
 int Cornum=-1;
 int step=-1;
-char Corporation[15][2]={SAMSUNG,HYUNDAI};
-int main(){
 
+
+int main(){
+   printf("%s",Corp);
    DisplayMenu();
- 
+
    printf("\nPress the number\n");
 
    while(1)
    {
-     scanf("%d",&step);
+     if(step!=0) scanf("%d",&step);
      switch(step)
      {
+       case 0: DisplayMenu();
+               break;
        case 1: Step_1();
                break;
        case 2: Step_2();
@@ -31,7 +34,7 @@ int main(){
        case 3: Invest(Mymoney);
                break;
      }
-    step=-1;
+    step = 0;
    }
 
 
@@ -48,19 +51,22 @@ void Step_2()
    system("clear");
    printf("22222\n");
 }
+
 void Step_3()
 {
   system("clear");
   printf("33333\n");
 }
+
 void Invest(int money)
 {
   printf("1.Press the Initial investment\n");
   scanf("%d",&Mymoney);
   printf("2.Press the Corporation Number\n");
   scanf("%d",&Cornum);
-  printf("Investment fund is %d, Corporation is %s",Mymoney,Corporation[15][Cornum]);
+  printf("Investment fund is %d, Corporation is %s", Mymoney, Corp[Cornum]);
 }
+
 void DisplayMenu(){
    printf("**********************************************************\n");
    printf("******This is Stock Simulation of Embeddedsw Project******\n");
