@@ -59,7 +59,7 @@ void Step_1()
      printf("Corporation # : %d\n",i);
      printf("\n");
    }
-   step=-1;
+   step=0;
 }
 void Step_2()
 {
