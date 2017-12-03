@@ -59,7 +59,7 @@ void Step_1()
      printf("Corporation # : %d\n",i);
      printf("\n");
    }
-   step=0;
+   step=-1;
 }
 void Step_2()
 {
@@ -75,7 +75,6 @@ void Invest()
   printf("2.Press the Corporation Number\n");
   scanf("%ld",&Cornum);
   printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum-1][10]);
-  step=0;
 }
 
 void DisplayMenu(){
