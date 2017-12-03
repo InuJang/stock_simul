@@ -11,32 +11,32 @@ void main()
 	struct stat s_buf;
 	int SZ_BUF = 1024;
 	char textbuf[4096];
+	char stockP[4096];
 	char *line;
 	char ch;
 	int cnt = 0;
-	
-	fd3 = fopen ("Samsung_Electronics.txt","r+");
-	fd4 = fopen ("Samsung.txt","w");
-	line = fgets(textbuf,sizeof(textbuf),fd3);
-	while((ch = fgetc(fd3))!=EOF)
+	int cnt2 = 0;
+	fd3 = fopen ("Samsung_test.txt","w");
+	fd4 = fopen ("Samsung.txt","r+");
+	line = fgets(textbuf,sizeof(textbuf),fd4);
+	while((ch = fgetc(fd4))!=EOF)
 	{
 		if(ch == '\n')
 		{
+			fprintf(fd3,"%s",stockP);
+			fprintf(fd3,"\n");
+			cnt2=0;
 			cnt = 0;
 		}
 		if(ch == ',')
 		{
 			cnt++;
 		}
-		if(cnt == 0)
+		else if(cnt >= 1)
 		{
-			fprintf(fd4,"%c",ch);
+			stockP[cnt2] = ch;
+			cnt2++;
 		}
-		if(cnt == 4)
-		{	
-			fprintf(fd4,"%c",ch);
-		}
-
 	}
 	close(fd3);
 	close(fd4);
