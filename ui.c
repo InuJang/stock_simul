@@ -12,7 +12,11 @@ void Invest(int money);
 int Mymoney=0;
 int Cornum=-1;
 int step=-1;
+char *Corp[2][10]={
+  "samsung",
+  "sk telecom"
 
+}
 
 int main(){
    printf("%s",Corp);
