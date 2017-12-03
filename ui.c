@@ -7,19 +7,26 @@ void DisplayMenu();
 void Step_1();
 void Step_2();
 void Step_3();
-void Invest(int money);
+void Invest();
 
-int Mymoney=0;
-int Cornum=-1;
+long int Mymoney=0;
+long int Cornum=-1;
 int step=-1;
-char *Corp[2][10]={
-  "samsung",
-  "sk telecom"
+char Corp[10][10]={
+  "SAMSUNG",
+  "SK TELECOM",
+  "HYUNDAI",
+  "DAEWOO",
+  "APPLE",
+  "GOOGLE",
+  "AMAZON",
+  "IBM",
+  "LOTTE",
+  "FACEBOOK"
+};
+char quit;
+int main(void){
 
-}
-
-int main(){
-   printf("%s",Corp);
    DisplayMenu();
 
    printf("\nPress the number\n");
@@ -35,40 +42,37 @@ int main(){
                break;
        case 2: Step_2();
                break;
-       case 3: Invest(Mymoney);
+       case 3: Invest();
                break;
      }
-    step = 0;
    }
+return 0;
 
 
 
-   return 0;
 }
 void Step_1()
 {
    system("clear");
    printf("This is Stock corporation\n");
+   step=-1;
 }
 void Step_2()
 {
    system("clear");
    printf("22222\n");
+   step=-1;
 }
 
-void Step_3()
-{
-  system("clear");
-  printf("33333\n");
-}
-
-void Invest(int money)
+void Invest()
 {
   printf("1.Press the Initial investment\n");
-  scanf("%d",&Mymoney);
+  scanf("%ld",&Mymoney);
   printf("2.Press the Corporation Number\n");
-  scanf("%d",&Cornum);
-  printf("Investment fund is %d, Corporation is %s", Mymoney, Corp[Cornum]);
+  scanf("%ld",&Cornum);
+  printf("########Investment fund is %ld, Corporation is %s#########", Mymoney, &Corp[Cornum][10]);
+  step=0;
+  printf("\n");
 }
 
 void DisplayMenu(){
@@ -81,4 +85,5 @@ void DisplayMenu(){
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
+   step=-1;
 }
