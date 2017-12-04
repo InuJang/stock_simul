@@ -17,21 +17,8 @@ long int Mymoney=0;
 long int Cornum=-1;
 int step=-1;
 
-char Corp[10][11]={
-  "SAMSUNG",
-  "SK TELECOM",
-  "HYUNDAI",
-  "DAEWOO",
-  "APPLE",
-  "GOOGLE",
-  "AMAZON",
-  "IBM",
-  "LOTTE",
-  "FACEBOOK"
-};
-
 int main(void){
-   /*
+   
    DisplayMenu();
 
    printf("\nPress the number\n");
@@ -43,29 +30,19 @@ int main(void){
      {
        case 0: DisplayMenu();
                break;
-       case 1: Step_1();
+       case 1: CorpList();;
                break;
        case 2: Step_2();
                break;
        case 3: Invest();
                break;
      }
-   }*/
-   CorpList();
+   }
+   
 return 0;
 
 }
-void Step_1()
-{
-   system("clear");
-   for( int i=0; i<10; i++)
-   {
-     printf("Corporation Name : %s\n",Corp[i]);
-     printf("Corporation # : %d\n",i);
-     printf("\n");
-   }
-   step=-1;
-}
+
 void Step_2()
 {
    system("clear");
@@ -78,8 +55,8 @@ void Invest()
   printf("1.Press the Initial investment\n");
   scanf("%ld",&Mymoney);
   printf("2.Press the Corporation Number\n");
-  scanf("%ld",&Cornum);
-  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum][11]);
+  //scanf("%ld",&Cornum);
+  //printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum][11]);
 }
 
 void DisplayMenu(){
@@ -96,12 +73,20 @@ void DisplayMenu(){
 }
 void CorpList()
 {
+   system("clear");
    int fd;
-   int re;
-   char buf[1024];
+   ssize_t ret;
+   char buf[1024]={'\0'};
    fd=open("/home/jungjunkim/embeddedsw_project/stock_simul/stock_data/list.txt", O_RDONLY);
    if(fd==-1) perror("open");
-   re=read(fd, buf, 7);
-     printf("%s\n",&buf);
-     printf("%d",re);
+   while(ret != NULL){
+      ret=read(fd,buf,50);
+   }
+   printf("**********************************************************\n");
+   printf("***************THIS IS LIST OF CORPORATION****************\n");
+   printf("**********************************************************\n");
+   printf("%s",buf);
+   printf("**********************************************************\n");
+   printf("**********************************************************\n");
+   printf("**********************************************************\n");
 }
