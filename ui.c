@@ -2,12 +2,16 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 void DisplayMenu();
 void Step_1();
 void Step_2();
 void Step_3();
 void Invest();
+void CorpList();
 
 long int Mymoney=0;
 long int Cornum=-1;
@@ -27,11 +31,11 @@ char Corp[10][11]={
 };
 
 int main(void){
-
+   /*
    DisplayMenu();
 
    printf("\nPress the number\n");
-
+   
    while(1)
    {
      if(step!=0) scanf("%d",&step);
@@ -46,7 +50,8 @@ int main(void){
        case 3: Invest();
                break;
      }
-   }
+   }*/
+   printf("1123123123");
 return 0;
 
 }
@@ -74,7 +79,7 @@ void Invest()
   scanf("%ld",&Mymoney);
   printf("2.Press the Corporation Number\n");
   scanf("%ld",&Cornum);
-  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum-1][10]);
+  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum]);
 }
 
 void DisplayMenu(){
@@ -88,4 +93,11 @@ void DisplayMenu(){
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    step=-1;
+}
+void CorpList()
+{
+   int fd;
+   fd=open("~/embeddedsw_project/stock_simul/stock_data/list.txt", O_RDONLY);
+   if(fd==-1) perror("open");
+   else printf("success");
 }
