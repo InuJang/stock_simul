@@ -31,7 +31,7 @@ void main()
 		if(ch == '\n')
 		{	
 			stock_price[cnt3] = atoi(stockP);
-			stock_change=((float)stock_price[0]/(float)stock_price[cnt3])*100 - 100;
+			stock_change=(((float)stock_price[0]-(float)stock_price[cnt3])/(float)stock_price[0])*100;
 			sprintf(tmp,"%d",(int)stock_change);
 			printf("%s \n",tmp);
 			fprintf(fd3,"%s",stockP);
