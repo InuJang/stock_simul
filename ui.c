@@ -7,47 +7,74 @@ void DisplayMenu();
 void Step_1();
 void Step_2();
 void Step_3();
+void Invest();
 
-int main(){
+long int Mymoney=0;
+long int Cornum=-1;
+int step=-1;
+
+char Corp[10][11]={
+  "SAMSUNG",
+  "SK TELECOM",
+  "HYUNDAI",
+  "DAEWOO",
+  "APPLE",
+  "GOOGLE",
+  "AMAZON",
+  "IBM",
+  "LOTTE",
+  "FACEBOOK"
+};
+
+int main(void){
 
    DisplayMenu();
-   int step=-1;
-   
+
    printf("\nPress the number\n");
-   
+
    while(1)
    {
-     scanf("%d",&step);
+     if(step!=0) scanf("%d",&step);
      switch(step)
      {
+       case 0: DisplayMenu();
+               break;
        case 1: Step_1();
                break;
        case 2: Step_2();
                break;
-       case 3: Step_3();
+       case 3: Invest();
                break;
      }
-    step=-1;  
-   } 
+   }
+return 0;
 
-
-
-   return 0;
 }
 void Step_1()
 {
-   printf("11111");
-
+   system("clear");
+   for( int i=0; i<10; i++)
+   {
+     printf("Corporation Name : %s\n",Corp[i]);
+     printf("Corporation # : %d\n",i);
+     printf("\n");
+   }
+   step=-1;
 }
 void Step_2()
-{ 
-   printf("22222");
-
+{
+   system("clear");
+   printf("22222\n");
+   step=-1;
 }
-void Step_3()
-{ 
-   printf("33333");
 
+void Invest()
+{
+  printf("1.Press the Initial investment\n");
+  scanf("%ld",&Mymoney);
+  printf("2.Press the Corporation Number\n");
+  scanf("%ld",&Cornum);
+  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum-1][10]);
 }
 
 void DisplayMenu(){
@@ -56,8 +83,9 @@ void DisplayMenu(){
    printf("**********************************************************\n");
    printf("1. Comfirm the corporation\n");
    printf("2. Check the price-earnings ratio of corporation\n");
-   printf("3. Invest!!! \n");\
+   printf("3. Invest!!! \n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
+   step=-1;
 }
