@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 void main()
 {
 	int fd,fd2;
@@ -12,11 +13,15 @@ void main()
 	int SZ_BUF = 1024;
 	char textbuf[4096];
 	char stockP[4096];
+	char tmp[100] = {0,};
+	int stock_price[30000] = {0,};
+	
 	char *line;
 	char ch;
 	int cnt = 0;
 	int cnt2 = 0;
 	int cnt3 = 0;
+	float stock_change = 0;
 	fd3 = fopen ("Samsung_day.txt","w");
 	fd4 = fopen ("Samsung.txt","r+");
 	fd5 = fopen ("Samsung_week.txt","w");
@@ -24,16 +29,25 @@ void main()
 	while((ch = fgetc(fd4))!=EOF)
 	{
 		if(ch == '\n')
-		{
-			fprintf(fd3,"%s\n",stockP);
+		{	
+			stock_price[cnt3] = atoi(stockP);
+			stock_change=((float)stock_price[0]/(float)stock_price[cnt3])*100 - 100;
+			sprintf(tmp,"%d",(int)stock_change);
+			printf("%s \n",tmp);
+			fprintf(fd3,"%s",stockP);
+			fprintf(fd3,"  , %s%%\n",tmp);
+			
 
 			if(cnt3%7 == 0)
 			{
-				fprintf(fd5,"%s\n",stockP);
+				fprintf(fd5,"%s",stockP);
+				fprintf(fd5,"  , %s%%\n",tmp);
+				
 			}
 			if(cnt3%32 == 0 && ch=='\n')
 			{
-				fprintf(fd6,"%s\n",stockP);
+				fprintf(fd6,"%s",stockP);
+				fprintf(fd6,"  , %s%%\n",tmp);
 			}
 			cnt2=0;
 			cnt = 0;
