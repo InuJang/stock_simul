@@ -35,7 +35,7 @@ int main(void){
    DisplayMenu();
 
    printf("\nPress the number\n");
-   
+
    while(1)
    {
      if(step!=0) scanf("%d",&step);
@@ -51,7 +51,7 @@ int main(void){
                break;
      }
    }*/
-   printf("1123123123");
+   CorpList();
 return 0;
 
 }
@@ -79,7 +79,7 @@ void Invest()
   scanf("%ld",&Mymoney);
   printf("2.Press the Corporation Number\n");
   scanf("%ld",&Cornum);
-  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum]);
+  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum][11]);
 }
 
 void DisplayMenu(){
@@ -97,7 +97,11 @@ void DisplayMenu(){
 void CorpList()
 {
    int fd;
-   fd=open("~/embeddedsw_project/stock_simul/stock_data/list.txt", O_RDONLY);
+   int re;
+   char buf[1024];
+   fd=open("/home/jungjunkim/embeddedsw_project/stock_simul/stock_data/list.txt", O_RDONLY);
    if(fd==-1) perror("open");
-   else printf("success");
+   re=read(fd, buf, 7);
+     printf("%s\n",&buf);
+     printf("%d",re);
 }
