@@ -104,8 +104,9 @@ void Samsung_day()
   if(s_fd==-1) perror("open");
   while(s_ret != NULL){
       s_ret=read(s_fd,s_buf,1);
-      result=strtok(s_buf,",");
-      result2=strtok(result," ");
-      write(1,result2,1);
+      result=strtok(s_buf,"%");
+      //result2=strtok(result,"%");
+
+      write(1,result,1);
   }
 }
