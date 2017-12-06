@@ -98,13 +98,14 @@ void Samsung_day()
 {
   char s_buf[1024]={'\0'};
   int s_fd;
-  char *result;
+  char *result,*result2,*result3;
   ssize_t s_ret;
   s_fd=open("/home/jungjunkim/embeddedsw_project/stock_simul/stock_data/Samsung_day.txt",O_RDONLY);
   if(s_fd==-1) perror("open");
   while(s_ret != NULL){
       s_ret=read(s_fd,s_buf,1);
-      result=strtok(s_buf,"p");
-      write(1,s_buf,1);
+      result=strtok(s_buf,",");
+      result2=strtok(result," ");
+      write(1,result2,1);
   }
 }
