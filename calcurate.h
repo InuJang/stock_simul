@@ -1,6 +1,5 @@
-#ifndef
-#include CALCURATE_H
-#endif
+#ifndef CALCURATE_H
+#define CALCURATE_H
 
 #include <sys/types.h>
 #include <sys/stat.h>
