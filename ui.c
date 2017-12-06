@@ -12,13 +12,15 @@ void Step_2();
 void Step_3();
 void Invest();
 void CorpList();
+void Samsung_day();
+
 
 long int Mymoney=0;
 long int Cornum=-1;
 int step=-1;
 
 int main(void){
-   
+   /*
    DisplayMenu();
 
    printf("\nPress the number\n");
@@ -38,7 +40,9 @@ int main(void){
                break;
      }
    }
-   
+   */
+   Samsung_day();
+
 return 0;
 
 }
@@ -89,4 +93,20 @@ void CorpList()
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
+}
+void Samsung_day()
+{
+  char s_buf[1024]={'\0'};
+  int s_fd;
+  ssize_t s_ret;
+  s_fd=open("/home/jungjunkim/embeddedsw_project/stock_simul/stock_data/Samsung_day.txt",O_RDONLY);
+  if(s_fd==-1) perror("open");
+  while(s_ret != NULL){
+     s_ret=read(s_fd,s_buf,1);
+    if(s_buf ==","){
+       write(1,s_buf,4);
+      // s_ret=read(s_fd,s_buf,1);
+    }
+  }
+  //printf("%s",s_buf);
 }
