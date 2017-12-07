@@ -81,7 +81,7 @@ void CorpList()
    int fd;
    ssize_t ret;
    char buf[1024]={'\0'};
-   fd=open("/home/jungjunkim/embeddedsw_project/stock_simul/stock_data/list.txt", O_RDONLY);
+   fd=open("./stock_data/list.txt", O_RDONLY);
    if(fd==-1) perror("open");
    while(ret != NULL){
       ret=read(fd,buf,50);
@@ -100,13 +100,44 @@ void Samsung_day()
   int s_fd;
   char *result,*result2,*result3;
   ssize_t s_ret;
-  s_fd=open("/home/jungjunkim/embeddedsw_project/stock_simul/stock_data/Samsung_day.txt",O_RDONLY);
-  if(s_fd==-1) perror("open");
-  while(s_ret != NULL){
-      s_ret=read(s_fd,s_buf,1);
-      result=strtok(s_buf,"%");
-      //result2=strtok(result,"%");
-
-      write(1,result,1);
-  }
+  char ch;
+  char stockP[365][100];
+  char stockR[365][100];
+  int cnt = 0;
+  int cnt2 = 0;
+  int cnt3 = 0;
+  int cnt4 = 0;
+  s_fd=fopen("./stock_data/Samsung_day.txt","r+");
+      while((ch = fgetc(s_fd))!=EOF)
+      {
+	 if(ch == '\n')
+         {
+    	    printf("%s,%s%%\n",stockP[cnt4],stockR[cnt4]);
+            cnt = 0;
+            cnt2 = 0;
+            cnt3 = 0;
+	    cnt4++;
+	    continue;
+         }
+	 if(ch == ',')
+         {
+            cnt++;
+	    continue;
+         }
+	 if(ch== '%')
+	 {
+	    continue;
+	 }
+	 if(cnt == 0)
+	 {
+	    stockP[cnt4][cnt2] = ch;
+	    cnt2++;
+	 }
+	 if(cnt == 1)
+	 {
+	    stockR[cnt4][cnt3] = ch;
+	    cnt3++;
+	 }
+      }
+      fclose(s_fd);
 }

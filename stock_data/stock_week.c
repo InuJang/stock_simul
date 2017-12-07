@@ -35,19 +35,19 @@ void main()
 			sprintf(tmp,"%d",(int)stock_change);
 			printf("%s \n",tmp);
 			fprintf(fd3,"%s",stockP);
-			fprintf(fd3,"  , %s%%\n",tmp);
+			fprintf(fd3,",%s%%\n",tmp);
 			
 
 			if(cnt3%7 == 0)
 			{
 				fprintf(fd5,"%s",stockP);
-				fprintf(fd5,"  , %s%%\n",tmp);
+				fprintf(fd5,",%s%%\n",tmp);
 				
 			}
 			if(cnt3%32 == 0 && ch=='\n')
 			{
 				fprintf(fd6,"%s",stockP);
-				fprintf(fd6,"  , %s%%\n",tmp);
+				fprintf(fd6,",%s%%\n",tmp);
 			}
 			cnt2=0;
 			cnt = 0;
