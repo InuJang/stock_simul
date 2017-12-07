@@ -78,22 +78,15 @@ void DisplayMenu(){
 void CorpList()
 {
    system("clear");
-   int fd;
+   FILE *fd;
    char data;
    int i=0;
    int j=0;
    fd=fopen("./stock_data/list.txt", "r+");
    if(fd==-1) perror("open");
    while((data = fgetc(fd))!=EOF){
-      if(data == '\n')
-      {
-         j=0;
-         i++;
-         continue;
-      }
-      Corp[i][j]=data;
-      j++;
-      printf("%s",Corp[i][j]);
+      fgets(Corp[i],128,fd);
+      printf("%s",Corp[i]);
    }
    printf("**********************************************************\n");
    printf("***************THIS IS LIST OF CORPORATION****************\n");
