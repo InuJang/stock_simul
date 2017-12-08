@@ -48,7 +48,7 @@ return 0;
 }
 
 void Step_2()
-{
+ {
    system("clear");
    printf("22222\n");
    step=-1;
@@ -59,8 +59,8 @@ void Invest()
   printf("1.Press the Initial investment\n");
   scanf("%ld",&Mymoney);
   printf("2.Press the Corporation Number\n");
-  //scanf("%ld",&Cornum);
-  //printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum][11]);
+  scanf("%ld",&Cornum);
+  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum][11]);
 }
 
 void DisplayMenu(){
@@ -78,21 +78,21 @@ void DisplayMenu(){
 void CorpList()
 {
    system("clear");
-   FILE *fd;
+   int fd;
    char data;
    int i=0; 
    int j=0;
-   fd=fopen("./stock_data/list.txt", "r");
+   int ret;
+   fd=open("./stock_data/list.txt", "r");
    
-   while( (data = fgetc(fd))!=EOF )
+   while( ret=(read(fd,Corp[i],1))!=NULL )
    {
-      if(data == '\n'){
-          i++;
-          j=0;
-          continue;
-      }
-      Corp[i][j]=data;
-      j++;
+     write(fd,Corp[i],1);
+     if(*Corp[i] == '\n')
+     {
+        i++;
+        continue;
+     }
    }
    printf("**********************************************************\n");
    printf("***************THIS IS LIST OF CORPORATION****************\n");
