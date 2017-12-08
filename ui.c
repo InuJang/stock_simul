@@ -80,18 +80,24 @@ void CorpList()
    system("clear");
    FILE *fd;
    char data;
-   int i=0;
+   int i=0; 
    int j=0;
-   fd=fopen("./stock_data/list.txt", "r+");
-   if(fd==-1) perror("open");
-   while((data = fgetc(fd))!=EOF){
-      fgets(Corp[i],128,fd);
-      printf("%s",Corp[i]);
+   fd=fopen("./stock_data/list.txt", "r");
+   
+   while( (data = fgetc(fd))!=EOF )
+   {
+      if(data == '\n'){
+          i++;
+          j=0;
+          continue;
+      }
+      Corp[i][j]=data;
+      j++;
    }
    printf("**********************************************************\n");
    printf("***************THIS IS LIST OF CORPORATION****************\n");
    printf("**********************************************************\n");
- //   printf("%s",buf);
+   printf("%s",Corp[0]);
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
