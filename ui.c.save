@@ -14,13 +14,13 @@ void Invest();
 void CorpList();
 void Samsung_day();
 
-char Corp[5][10];
+
 long int Mymoney=0;
 long int Cornum=-1;
 int step=-1;
 
 int main(void){
-
+   
    DisplayMenu();
 
    printf("\nPress the number\n");
@@ -40,7 +40,7 @@ int main(void){
                break;
      }
    }
-
+   
    //Samsung_day();
 
 return 0;
@@ -48,7 +48,7 @@ return 0;
 }
 
 void Step_2()
- {
+{
    system("clear");
    printf("22222\n");
    step=-1;
@@ -59,8 +59,8 @@ void Invest()
   printf("1.Press the Initial investment\n");
   scanf("%ld",&Mymoney);
   printf("2.Press the Corporation Number\n");
-  scanf("%ld",&Cornum);
-  printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum][11]);
+  //scanf("%ld",&Cornum);
+  //printf("######## Investment fund is %ld, Corporation is %s ##########\n\n", Mymoney, &Corp[Cornum][11]);
 }
 
 void DisplayMenu(){
@@ -80,24 +80,25 @@ void CorpList()
    system("clear");
    int fd;
    char data;
-   int i=0; 
+   int i=0;
    int j=0;
-   int ret;
-   fd=open("./stock_data/list.txt", "r");
-   
-   while( ret=(read(fd,Corp[i],1))!=NULL )
-   {
-     write(fd,Corp[i],1);
-     if(*Corp[i] == '\n')
-     {
-        i++;
-        continue;
-     }
+   char buf[1024]={'\0'};
+   char Corp[5][10];
+   fd=open("./stock_data/list.txt", O_RDONLY);
+   if(fd==-1) perror("open");
+   while((data = fgetc(fd))!=EOF){
+      if(data == '\n')
+      {
+         j=0;
+      }
+      Corp[i][j]=data;
+      j++;
+      printf("%s",Corp);
    }
    printf("**********************************************************\n");
    printf("***************THIS IS LIST OF CORPORATION****************\n");
    printf("**********************************************************\n");
-   printf("%s",Corp[i][0]);
+ //   printf("%s",buf);
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
@@ -106,6 +107,7 @@ void Samsung_day()
 {
   char s_buf[1024]={'\0'};
   int s_fd;
+  char *result,*result2,*result3;
   ssize_t s_ret;
   char ch;
   char stockP[365][100];
@@ -148,3 +150,5 @@ void Samsung_day()
       }
       fclose(s_fd);
 }
+
+

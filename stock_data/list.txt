@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 Samsung_Electronics
 LG_Display
 kospi
+=======
+SSmmuuggLL__iippaa
+
+oopp
+
+>>>>>>> f25ef6ab281087fc9595ddf603030e93a1ecf0b6
