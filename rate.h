@@ -9,16 +9,20 @@
 #include <fcntl.h>
 
 
-void Samsung()
+long float Samsung(long float money,long float rate, long float result)
 {
-    
-
+   result= (1-rate)*money; //this is current my invest ment
+   printf("This is Samsung Profit of investment %lf",result);
+   return result;
 }
-void LGdisp()
+long float LGdisp(long float money,long float rate, long float result)
 {
-
+   result = (1-rate)*money;
+   printf("This is LGdisp Profit of investment %lf",result);
+   return result;
 }
-void Cospi()
-{
-
+void Display_my_Profit()
+{ 
+   Samsung(money,rate,result);
+   LGdisp(money,rate,result);
 }
