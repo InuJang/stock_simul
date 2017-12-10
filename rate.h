@@ -9,14 +9,15 @@
 #include <fcntl.h>
 
 
-void Samsung()
+long float Samsung(long float money,long float rate, long float result)
 {
-    
-
+ result= (1-rate)*money; //this is current my invest ment
+ return result;
 }
-void LGdisp()
+long float LGdisp(long float money,long float rate, long float result)
 {
-
+ result = (1-rate)*money;
+ return result;
 }
 void Cospi()
 {
