@@ -230,6 +230,7 @@ void Invest()
    int flag=0;
    char *line;
    int num = 0;
+   int total = 0;
    system("clear");
    fd=fopen("./stock_data/list.txt", "r");
   while(fgets(textbuf,sizeof(textbuf),fd)!=NULL)
@@ -299,11 +300,9 @@ void Invest()
    {
       printf("file is already exist\n");
       printf("automatically remake file\n");
-      fp3 = fopen(my_stock,"w");
    }
    else
    {
-      fp3 = fopen(my_stock,"w");
       printf("%s\n",my_stock);
       printf("open complete\n");
    }
@@ -326,12 +325,22 @@ void Invest()
    scanf("%d",&price2);
    price3 = atoi(price);
    printf("you bought %d, is %d $ \n", price2,price2*price3);
-   scanf("%c",&step);
-   step = -1;
-   fprintf(fp3,"%d",price3*price2);
-   fprintf(fp3,",%d\n",price2);
+
+   fp3 = fopen(my_stock,"w+");
+   total = price3*price2;
+   fprintf(fp3,"%d",total);
+   fprintf(fp3,",%d",price2);
+
+
+   printf("if return to previous menu, press q\n");
+   while(step!='q')
+   {
+	scanf("%c",&step);
+   }
    close(fp2);
    close(fp3);
+   step = 0;
+   system("clear");
    DisplayMenu();
 }
 
@@ -389,8 +398,8 @@ void Check_invest()
    char tmp_d[100][50] ={0,};
    char my_stock[10][50]={0,};
    char price[50]={0,};
-   int my_price2[10] = {0,};
-   int my_num[10] = {0,};
+   int my_price2[30] = {0,};
+   int my_num = 0;
    int cur_price2[10] = {0,};
    int price3 = 0;
    int cor_num =0;
@@ -433,6 +442,7 @@ void Check_invest()
    cnt = 0;
    while(cnt<cnt3)
    {
+	memset(textbuf,NULL,sizeof(textbuf));
 	flag2=0;
 	cnt2 = 0;
 	if(access(my_stock[cnt],0)==0)
@@ -444,34 +454,41 @@ void Check_invest()
 		{
 		   flag2++;
 		   my_price2[cnt]= atoi(textbuf);
-		   memset(textbuf,0,sizeof(textbuf));
+		   memset(textbuf,NULL,sizeof(textbuf));
+		   cnt2 = 0;
 		}
-		if(flag2==0)
+		else if(flag2==0)
 		{
 		   textbuf[cnt2] = ch;
 		}
 		else
 		{
-		   my_num[cnt] = ch-'0';
+	   	   my_num = ch- '0';
 		}	
 		cnt2++;
             }
+
+            printf("%d",my_num);
+	    memset(textbuf,NULL,sizeof(textbuf));
 	    close(fp3);
 	    fp3 = fopen(tmp_d[cnt],"r");
 	    cnt2 = 0;
-	    while((ch = fgetc(fp3))!=',')
+	    while(1)
 	    {
+		if((ch = fgetc(fp3))==',')
+		{
+		   break;
+		}
 		textbuf[cnt2] = ch;
 		cnt2++;
 	    }
 	    close(fp3);
 	    cur_price2[cnt] = atoi(textbuf);
-	    rate =(((float)cur_price2[cnt]-(float)my_price2[cnt]/my_num[cnt])/(float)my_price2[cnt]/my_num[cnt])*100;
-	    printf("\n \n %d , %d\n \n",my_price2[cnt]/my_num[cnt],cur_price2[cnt]);
+	    rate =(((float)cur_price2[cnt]-(float)my_price2[cnt]/(float)my_num)/(float)my_price2[cnt]/(float)my_num)*100;
+	    printf("\n \n %d , %d\n \n",my_price2[cnt]/my_num,cur_price2[cnt]);
 	    printf("%s Corperation Stock Increased by",stock_name[cnt]);
             printf(" %f %%\n",rate);
-	    printf("you gain %d $ \n",(cur_price2[cnt]*my_num[cnt]-my_price2[cnt]));
-
+	    printf("you gain %d $ \n",(cur_price2[cnt]-my_price2[cnt]/my_num)*my_num);
 	}
 	cnt++;
    }
