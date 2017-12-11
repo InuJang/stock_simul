@@ -12,7 +12,7 @@ void Step_2();
 void Step_3();
 void Invest();
 void CorpList();
-void Samsung_day();
+void Check_invest();
 
 char Corp[5][10];
 long int Mymoney=0;
@@ -40,6 +40,10 @@ int main(void){
      if(step=='3')
      {
         Invest();
+     }
+     if(step=='4')
+     {
+	Check_invest();
      }
    }
 
@@ -325,6 +329,9 @@ void Invest()
    scanf("%c",&step);
    step = -1;
    fprintf(fp3,"%d",price3*price2);
+   fprintf(fp3,",%d\n",price2);
+   close(fp2);
+   close(fp3);
    DisplayMenu();
 }
 
@@ -332,7 +339,8 @@ void DisplayMenu(){
 
    printf("1. Comfirm the corporation\n");
    printf("2. Check the price-earnings ratio of corporations\n");
-   printf("3. Invest!!! \n");
+   printf("3. Invest to corporation \n");
+   printf("4. Check my investment\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
    printf("**********************************************************\n");
@@ -369,49 +377,109 @@ void CorpList()
    system("clear");
    DisplayMenu();
 }
-void Samsung_day()
+void Check_invest()
 {
-  char s_buf[1024]={'\0'};
-  int s_fd;
-  ssize_t s_ret;
-  char ch;
-  char stockP[365][100];
-  char stockR[365][100];
-  int cnt = 0;
-  int cnt2 = 0;
-  int cnt3 = 0;
-  int cnt4 = 0;
-  s_fd=fopen("./stock_data/Samsung_Electronic1_day.txt","r+");
-      while((ch = fgetc(s_fd))!=EOF)
-      {
-	 if(ch == '\n')
-         {
-    	    printf("%s,%s%%\n",stockP[cnt4],stockR[cnt4]);
-            cnt = 0;
-            cnt2 = 0;
-            cnt3 = 0;
-	    cnt4++;
-	    continue;
-         }
-	 if(ch == ',')
-         {
-            cnt++;
-	    continue;
-         }
-	 if(ch== '%')
-	 {
-	    continue;
-	 }
-	 if(cnt == 0)
-	 {
-	    stockP[cnt4][cnt2] = ch;
-	    cnt2++;
-	 }
-	 if(cnt == 1)
-	 {
-	    stockR[cnt4][cnt3] = ch;
-	    cnt3++;
-	 }
-      }
-      fclose(s_fd);
+   int fd2;
+   char stock_name[100][20];
+   char textbuf[1000];
+   char txt[10] = {"1_day.txt"};
+   char txt2[10] = {".txt"};
+   char route[100] = {"./stock_data/"};
+   char route2[100] = {"./my_stock/my_"};
+   char tmp_d[100][50] ={0,};
+   char my_stock[10][50]={0,};
+   char price[50]={0,};
+   int my_price2[10] = {0,};
+   int my_num[10] = {0,};
+   int cur_price2[10] = {0,};
+   int price3 = 0;
+   int cor_num =0;
+   char ch;
+   int cnt = 0;
+   int cnt2 = 0;
+   int cnt3 = 0;
+   int flag2 = 0;
+   int fd;
+   int fp3;
+   int fp2;
+   char *line;
+   int num = 0;
+   float rate = 0;
+   system("clear");
+   step=0;
+   printf("**********************************************************\n");
+   printf("***************** Check your invest data *****************\n");
+   printf("**********************************************************\n");
+   fp2=fopen("./stock_data/list.txt", "r");
+   while((ch = fgetc(fp2))!=EOF)
+   {
+	if(ch=='\n')
+	{
+		strcpy(my_stock[cnt],route2);
+		strcat(my_stock[cnt],stock_name[cnt]);
+		strcat(my_stock[cnt],txt2);
+		strcpy(tmp_d[cnt],route);
+		strcat(tmp_d[cnt],stock_name[cnt]);
+		strcat(tmp_d[cnt],txt);
+		cnt++;
+		cnt3++;
+		cnt2 = 0;
+		continue;
+	}
+	stock_name[cnt][cnt2] = ch;
+	cnt2++;
+   }
+   close(fp2);
+   cnt = 0;
+   while(cnt<cnt3)
+   {
+	flag2=0;
+	cnt2 = 0;
+	if(access(my_stock[cnt],0)==0)
+	{
+	    fp3 = fopen(my_stock[cnt],"r");
+            while((ch = fgetc(fp3))!=EOF)
+	    {
+		if(ch == ',')
+		{
+		   flag2++;
+		   my_price2[cnt]= atoi(textbuf);
+		   memset(textbuf,0,sizeof(textbuf));
+		}
+		if(flag2==0)
+		{
+		   textbuf[cnt2] = ch;
+		}
+		else
+		{
+		   my_num[cnt] = ch-'0';
+		}	
+		cnt2++;
+            }
+	    close(fp3);
+	    fp3 = fopen(tmp_d[cnt],"r");
+	    cnt2 = 0;
+	    while((ch = fgetc(fp3))!=',')
+	    {
+		textbuf[cnt2] = ch;
+		cnt2++;
+	    }
+	    close(fp3);
+	    cur_price2[cnt] = atoi(textbuf);
+	    rate =(((float)cur_price2[cnt]-(float)my_price2[cnt]/my_num[cnt])/(float)my_price2[cnt]/my_num[cnt])*100;
+	    printf("\n \n %d , %d\n \n",my_price2[cnt]/my_num[cnt],cur_price2[cnt]);
+	    printf("%s Corperation Stock Increased by",stock_name[cnt]);
+            printf(" %f %%\n",rate);
+	    printf("you gain %d $ \n",(cur_price2[cnt]*my_num[cnt]-my_price2[cnt]));
+
+	}
+	cnt++;
+   }
+   printf("if return to previous menu, press q\n");
+   while(step!='q')
+   {
+	scanf("%c",&step);
+   }
+   system("clear");
+   DisplayMenu();
 }
